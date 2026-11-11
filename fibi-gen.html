@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>fibi gen – אפליקציית דמה © 2026 Avishag Mevorach</title>
+<meta name="author" content="Avishag Mevorach">
+<meta name="copyright" content="© 2026 Avishag Mevorach">
+<!-- © 2026 Avishag Mevorach. All rights reserved. -->
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3fa;--card:#fff;--tx:#0d1b3d;--mu:#667794;--pr:#1556e6;--ac:#f5a524;--up:#0a9c5b;--dn:#d6334a;--bd:#dde5f1;--hero:#0d1b3d;--herotx:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#080f20;--card:#111b33;--tx:#eaf0fb;--mu:#8d9bb5;--pr:#5b93ff;--bd:#21304f;--up:#2ed08a;--dn:#ff6b7f;--hero:#16264d;--herotx:#fff}}
+:root[data-theme="dark"]{--bg:#080f20;--card:#111b33;--tx:#eaf0fb;--mu:#8d9bb5;--pr:#5b93ff;--bd:#21304f;--up:#2ed08a;--dn:#ff6b7f;--hero:#16264d;--herotx:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Heebo',system-ui,Arial,sans-serif;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+.app{max-width:440px;margin:0 auto;padding:0 14px 96px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 2px 10px}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.3px}.logo i{font-style:normal;color:var(--ac)}
+.tag{font-size:11px;color:var(--mu);border:1px solid var(--bd);border-radius:99px;padding:3px 9px}
+.kids{display:flex;gap:8px;margin:4px 0 14px}
+.kid{flex:1;border:1.5px solid var(--bd);background:var(--card);border-radius:14px;padding:9px 12px;text-align:start}
+.kid b{display:block;font-size:15px}.kid span{font-size:12px;color:var(--mu)}
+.kid[aria-pressed=true]{border-color:var(--pr);box-shadow:0 0 0 3px color-mix(in srgb,var(--pr) 18%,transparent)}
+.hero{background:var(--hero);color:var(--herotx);border-radius:22px;padding:20px 18px 16px}
+.hero small{opacity:.7;font-size:13px}
+.big{font-size:38px;font-weight:800;letter-spacing:-1px;margin:2px 0}
+.chg{font-size:14px;font-weight:600}.up{color:var(--up)}.dn{color:var(--dn)}
+.hero .up{color:#5ff0b0}.hero .dn{color:#ff8e9e}
+svg.spark{width:100%;height:64px;margin-top:10px;display:block}
+.cash{display:flex;justify-content:space-between;font-size:13px;opacity:.85;margin-top:8px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-top:14px}
+h2{font-size:16px;margin:0 0 4px}.sub{font-size:13px;color:var(--mu);margin:0 0 12px}
+.line{position:relative;height:10px;background:var(--bd);border-radius:9px;margin:26px 4px 8px}
+.line .fill{position:absolute;inset-block:0;inset-inline-start:0;border-radius:9px;background:linear-gradient(90deg,var(--pr),var(--ac))}
+.line .dot{position:absolute;top:50%;width:20px;height:20px;border-radius:50%;background:var(--ac);border:3px solid var(--card);transform:translate(50%,-50%)}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--mu)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.cmp div{border-radius:14px;padding:12px;background:var(--bg)}
+.cmp small{color:var(--mu);font-size:12px;display:block}.cmp b{font-size:20px}
+.cmp .m{background:color-mix(in srgb,var(--pr) 12%,var(--card));border:1px solid color-mix(in srgb,var(--pr) 35%,transparent)}
+label.r{display:flex;justify-content:space-between;font-size:14px;margin-top:6px}
+input[type=range]{width:100%;accent-color:var(--pr)}
+.note{font-size:11.5px;color:var(--mu);margin-top:10px;line-height:1.5}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--bd);width:100%;background:none;border-inline:0;border-top:0;text-align:start}
+.row:last-child{border-bottom:0}
+.row .n b{display:block;font-size:15px}.row .n span{font-size:12px;color:var(--mu)}
+.row .p{text-align:end;font-weight:600;font-size:15px}.row .p span{display:block;font-size:12px}
+.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:600;background:var(--pr);color:#fff}
+.btn.o{background:transparent;color:var(--pr);border:1.5px solid var(--pr)}
+.btn.s{padding:7px 12px;font-size:13px}
+nav{position:fixed;inset-inline:0;bottom:0;background:var(--card);border-top:1px solid var(--bd);padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:6px;z-index:5}
+nav button{flex:1;max-width:140px;border:0;background:none;padding:8px;border-radius:12px;font-size:13px;color:var(--mu);font-weight:600}
+nav button[aria-current=true]{background:color-mix(in srgb,var(--pr) 14%,transparent);color:var(--pr)}
+.sheet-bg{position:fixed;inset:0;background:rgba(5,10,25,.55);display:none;align-items:flex-end;justify-content:center;z-index:10}
+.sheet-bg.on{display:flex}
+.sheet{background:var(--card);width:100%;max-width:440px;border-radius:22px 22px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom,0px));animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.sheet{animation:none}}
+.seg{display:flex;background:var(--bg);border-radius:12px;padding:3px;margin:12px 0}
+.seg button{flex:1;border:0;background:none;border-radius:10px;padding:8px;font-weight:600;color:var(--mu)}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.amt{width:100%;font:800 30px 'Heebo',sans-serif;text-align:center;border:1.5px solid var(--bd);border-radius:14px;padding:12px;background:var(--bg);color:var(--tx)}
+.chips{display:flex;gap:8px;margin:10px 0}.chips button{flex:1;border:1px solid var(--bd);background:var(--bg);border-radius:10px;padding:7px;font-size:13px}
+.sum{font-size:13px;color:var(--mu);text-align:center;margin:8px 0 14px;min-height:20px}
+.toast{position:fixed;inset-inline:0;top:calc(14px + env(safe-area-inset-top,0px));margin:auto;width:max-content;max-width:90%;background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.empty{text-align:center;color:var(--mu);padding:22px 8px;font-size:14px}
+.kids{overflow-x:auto}.kid{min-width:112px}.kid.add{flex:0 0 auto;min-width:96px;border-style:dashed;color:var(--pr)}
+.mch{display:flex;gap:8px;overflow-x:auto;margin:4px 0 12px}.mch button{white-space:nowrap;border:1px solid var(--bd);background:var(--card);border-radius:99px;padding:7px 14px;font-size:13px}.mch button[aria-pressed=true],.gchips button[aria-pressed=true]{background:var(--pr);color:#fff;border-color:var(--pr)}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:14px}.kv:last-child{border:0}
+.bar{height:8px;border-radius:6px;background:var(--bd);margin:5px 0 10px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pr)}
+.acc{display:none;position:fixed;inset:0;background:var(--bg);z-index:15;overflow:auto}.acc.on{display:block}
+.accin{max-width:440px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 40px}
+.fl{display:block;font-size:14px;font-weight:600;margin-top:14px}.fl input{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;padding:12px;border:1.5px solid var(--bd);border-radius:12px;background:var(--card);color:var(--tx)}
+.opt{display:block;width:100%;text-align:start;border:1.5px solid var(--bd);background:var(--card);border-radius:14px;padding:12px 14px;margin-top:10px}.opt b{display:block}.opt span{font-size:12.5px;color:var(--mu)}.opt[aria-pressed=true]{border-color:var(--pr);box-shadow:0 0 0 3px color-mix(in srgb,var(--pr) 18%,transparent)}
+.err{color:var(--dn);font-size:13px;margin-top:12px}
+.steps{display:flex;gap:6px;margin:10px 0 18px}.steps i{flex:1;height:5px;border-radius:4px;background:var(--bd)}.steps i.d{background:var(--pr)}
+.gchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.gchips button{border:1px solid var(--bd);background:var(--card);border-radius:99px;padding:8px 14px}
+.ck{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;margin-top:14px;line-height:1.5}.ck input{margin-top:3px;width:18px;height:18px;accent-color:var(--pr)}
+.nv{display:flex;gap:10px;margin-top:20px}.nv .btn{flex:1}
+.hero.kidh{background:linear-gradient(135deg,#1556e6,#0d1b3d)}.hero.play{background:color-mix(in srgb,var(--ac) 32%,var(--hero))}
+.lock{display:inline-block;font-size:12px;background:color-mix(in srgb,var(--ac) 22%,transparent);border-radius:99px;padding:3px 10px;margin-top:8px}
+.top .btn.s{white-space:nowrap}
+#gate{z-index:40}
+.cr{text-align:center;font-size:12px;color:var(--mu);padding:18px 0 4px}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<nav id="nav"></nav>
+<div class="sheet-bg" id="bg"><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status"></div>
+<div class="acc" id="acc"></div>
+<div class="acc" id="roi"></div>
+<div class="acc" id="qrov"></div>
+<div class="acc on" id="gate"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+const CR='<div class="cr">© 2026 Avishag Mevorach · כל הזכויות שמורות</div>';
+const ASSETS=[
+{s:'SPX',n:'מדד S&P 500',t:'קרן סל',p:1850,v:.004},
+{s:'NDX',n:'נאסד״ק 100',t:'קרן סל',p:1590,v:.006},
+{s:'TA125',n:'ת״א 125',t:'קרן סל',p:2010,v:.005},
+{s:'BOND',n:'אג״ח ממשלתי',t:'קרן סל',p:410,v:.0012},
+{s:'AAPL',n:'Apple',t:'מניה',p:690,v:.008},
+{s:'NVDA',n:'Nvidia',t:'מניה',p:3300,v:.012},
+{s:'TEVA',n:'טבע',t:'מניה',p:68,v:.01}];
+const px={};ASSETS.forEach(a=>px[a.s]={p:a.p,o:a.p});
+const KIDS=[
+{name:'נועה',age:9,cash:1200,h:{SPX:{q:1.2,c:2000},TA125:{q:.6,c:1150}},hist:[]},
+{name:'יובל',age:5,cash:800,h:{BOND:{q:2,c:800}},hist:[]}];
+let cur=0,tab='home',dep=500,trade=null;
+const $=id=>document.getElementById(id);
+const f=(n,d=0)=>'₪'+Number(n).toLocaleString('he-IL',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct=n=>(n>=0?'+':'')+n.toFixed(2)+'%';
+const asset=s=>ASSETS.find(a=>a.s===s);
+function inv(k){return Object.entries(k.h).reduce((t,[s,x])=>t+x.q*px[s].p,0)}
+function cost(k){return Object.values(k.h).reduce((t,x)=>t+x.c,0)}
+function total(k){return k.cash+inv(k)}
+function snap(){KIDS.forEach(k=>{k.hist.push(total(k));if(k.hist.length>40)k.hist.shift()})}
+for(let i=0;i<30;i++){ASSETS.forEach(a=>{px[a.s].p*=1+(Math.random()-.47)*a.v});snap()}
+function tick(){ASSETS.forEach(a=>{px[a.s].p*=1+(Math.random()-.48)*a.v});snap();if(!trade&&!pinOpen)render()}
+setInterval(tick,3500);
+function spark(h){
+ const mn=Math.min(...h),mx=Math.max(...h),r=(mx-mn)||1;
+ const pts=h.map((v,i)=>[(i/(h.length-1))*300,56-((v-mn)/r)*48]);
+ const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+ return `<svg class="spark" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" fill="none" stroke="#5ff0b0" stroke-width="2.5" stroke-linejoin="round"/></svg>`}
+function fv(m,y,r){const i=r/12,n=y*12;return m*((Math.pow(1+i,n)-1)/i)}
+function home(k){
+ const t=total(k),c=cost(k),g=inv(k)-c,gp=c?g/c*100:0,yrs=18-k.age;
+ const sav=fv(dep,yrs,.03),mkt=fv(dep,yrs,.07),put=dep*12*yrs;
+ return `<div class="hero"><small>שווי התיק של ${k.name}</small><div class="big">${f(t)}</div>
+ <div class="chg ${g>=0?'up':'dn'}">${g>=0?'▲':'▼'} ${f(Math.abs(g))} (${pct(gp)}) מתחילת ההשקעה</div>${spark(k.hist)}
+ <div class="cash"><span>מזומן זמין לקנייה</span><b>${f(k.cash)}</b></div></div>
+ <div class="card"><h2>הדרך לגיל 18</h2><p class="sub">ההשקעה רשומה על שם ${k.name} ונשארת בניהולכם עד הבגרות.</p>
+ <div class="line"><div class="fill" style="width:${k.age/18*100}%"></div><div class="dot" style="inset-inline-start:${k.age/18*100}%"></div></div>
+ <div class="ends"><span>גיל 0</span><span>היום: ${k.age}</span><span>גיל 18</span></div></div>
+ <div class="card"><h2>שוק ההון מול תוכנית חיסכון</h2><p class="sub">סימולציה ל־${yrs} שנים עד גיל 18</p>
+ <label class="r"><span>הפקדה חודשית</span><b>${f(dep)}</b></label>
+ <input type="range" id="dep" min="100" max="3000" step="50" value="${dep}" aria-label="הפקדה חודשית">
+ <div class="cmp"><div><small>תוכנית חיסכון (3% בשנה)</small><b>${f(sav)}</b></div><div class="m"><small>תיק מנוהל (7% בשנה)</small><b>${f(mkt)}</b></div></div>
+ <p class="note">סה״כ הפקדות: ${f(put)}. הנתונים להמחשה בלבד, הנחות התשואה אינן הבטחה, ובשוק ההון עלול להיות הפסד. זו אפליקציית דמה ואינה ייעוץ השקעות.</p></div>`}
+function market(k){
+ return `<div class="card" style="margin-top:4px"><h2>שוק</h2><p class="sub">בחרו נכס כדי לקנות עבור ${k.name}. המחירים משתנים בזמן אמת (דמה).</p>`+
+ ASSETS.map(a=>{const x=px[a.s],c=(x.p/x.o-1)*100;return `<button class="row" data-s="${a.s}"><span class="n"><b>${a.n}</b><span>${a.t} · ${a.s}</span></span><span class="p">${f(x.p,2)}<span class="${c>=0?'up':'dn'}">${pct(c)}</span></span></button>`}).join('')+`</div>`}
+function port(k){
+ const e=Object.entries(k.h).filter(([,x])=>x.q>1e-6);
+ return `<div class="card" style="margin-top:4px"><h2>התיק של ${k.name}</h2><p class="sub">מזומן: ${f(k.cash)}</p>`+
+ (e.length?e.map(([s,x])=>{const a=asset(s),v=x.q*px[s].p,g=v-x.c;return `<button class="row" data-s="${s}" data-m="sell"><span class="n"><b>${a.n}</b><span>${x.q.toFixed(3)} יח׳ · עלות ${f(x.c)}</span></span><span class="p">${f(v)}<span class="${g>=0?'up':'dn'}">${g>=0?'+':'−'}${f(Math.abs(g))}</span></span></button>`}).join(''):'<div class="empty">התיק עדיין ריק. עברו ללשונית שוק וקנו את הנכס הראשון.</div>')+
+ `<button class="btn o" id="topup" style="width:100%;margin-top:12px">הפקידו ${f(500)} מחשבון העו״ש</button></div>`}
+function render(){if(mode=='child')return renderChild();renderParent()}
+function renderParent(){
+ const k=KIDS[cur],sc=window.scrollY;
+ $('app').innerHTML=`<div class="top"><div class="logo">fibi <i>gen</i></div><span style="display:flex;gap:6px;align-items:center"><button class="btn o s" data-qr="1">QR</button><button class="btn o s" data-roi="1">ROI בנק</button><button class="btn o s" data-mode="child">תצוגת ילד</button></span></div>
+ <div class="kids">${KIDS.map((x,i)=>`<button class="kid" data-k="${i}" aria-pressed="${i==cur}"><b>${x.name}</b><span>גיל ${x.age} · ${f(total(x))}</span></button>`).join('')}<button class="kid add" data-add="1"><b>＋</b><span>פתיחת חשבון</span></button></div>`+
+ (tab=='home'?home(k):tab=='market'?market(k):tab=='report'?report(k):port(k))+CR;
+ $('nav').innerHTML=[['home','סקירה'],['market','שוק'],['port','תיק'],['report','דוח']].map(([id,l])=>`<button data-t="${id}" ${tab==id?'aria-current="true"':''}>${l}</button>`).join('');
+ window.scrollTo(0,sc)}
+$('app').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.qr)openQr();else if(b.dataset.roi)openRoi();else if(b.dataset.mode){mode='child';tab='cmy';render();window.scrollTo(0,0)}
+ else if(b.dataset.add)openAcc();
+ else if(b.dataset.r!=null){rm=+b.dataset.r;render()}
+ else if(b.dataset.mail)toast('הדוח נשלח למייל ההורה (דמה)');
+ else if(b.dataset.k!=null){cur=+b.dataset.k;render()}
+ else if(b.dataset.s)open(b.dataset.s,b.dataset.m||'buy');
+ else if(b.id=='topup'){KIDS[cur].cash+=500;log(KIDS[cur],'dep','הפקדה מחשבון עו״ש',500);toast('הופקדו '+f(500)+' לחשבון של '+KIDS[cur].name);render()}});
+$('app').addEventListener('input',e=>{if(e.target.id=='dep'){dep=+e.target.value;const sc=window.scrollY;render();const r=$('dep');r.focus();window.scrollTo(0,sc)}});
+$('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b){tab=b.dataset.t;render();window.scrollTo(0,0)}});
+function open(s,m,play){trade={s,m,v:'',play:!!play};drawSheet();$('bg').classList.add('on');setTimeout(()=>$('amt')&&$('amt').focus(),50)}
+function close(){trade=null;$('bg').classList.remove('on')}
+$('bg').addEventListener('click',e=>{if(e.target.id=='bg')close()});
+document.addEventListener('keydown',e=>{if(e.key=='Escape'&&trade)close()});
+function drawSheet(){
+ const k=trade.play?playAcc(KIDS[cur]):KIDS[cur],{s,m,v}=trade,a=asset(s),h=k.h[s],max=m=='buy'?k.cash:(h?h.q*px[s].p:0),n=parseFloat(v)||0;
+ const ok=n>0&&n<=max+1e-6;
+ $('sheet').innerHTML=`<h2>${a.n} <span style="color:var(--mu);font-weight:400;font-size:13px">${f(px[s].p,2)}</span></h2>
+ <div class="seg"><button data-m="buy" aria-pressed="${m=='buy'}">קנייה</button><button data-m="sell" aria-pressed="${m=='sell'}">מכירה</button></div>
+ <input class="amt" id="amt" inputmode="decimal" placeholder="סכום ב־₪" value="${v}" aria-label="סכום בשקלים">
+ <div class="chips"><button data-a="100">100</button><button data-a="500">500</button><button data-a="max">הכול</button></div>
+ <div class="sum">${m=='buy'?'זמין לקנייה':'זמין למכירה'}: ${f(max)}${n>0?' · '+(n/px[s].p).toFixed(4)+' יח׳':''}${n>max+1e-6?'<br><span class="dn">הסכום גבוה מהיתרה הזמינה</span>':''}</div>
+ <button class="btn" id="go" style="width:100%" ${ok?'':'disabled style="width:100%;opacity:.45"'}>${m=='buy'?'קנו':'מכרו'} עבור ${k.name}</button>`}
+$('sheet').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ const k=trade.play?playAcc(KIDS[cur]):KIDS[cur],s=trade.s;
+ if(b.dataset.m){trade.m=b.dataset.m;trade.v='';drawSheet()}
+ else if(b.dataset.a){const h=k.h[s],max=trade.m=='buy'?k.cash:(h?h.q*px[s].p:0);trade.v=b.dataset.a=='max'?String(Math.floor(max*100)/100):b.dataset.a;drawSheet()}
+ else if(b.id=='go'){
+  const n=parseFloat(trade.v),q=n/px[s].p;
+  if(trade.m=='buy'){k.cash-=n;const h=k.h[s]||(k.h[s]={q:0,c:0});h.q+=q;h.c+=n;toast('נקנו '+q.toFixed(3)+' יח׳ של '+asset(s).n)}
+  else{const h=k.h[s],fr=Math.min(1,q/h.q);k.cash+=n;h.c*=1-fr;h.q-=q;toast('נמכרו '+q.toFixed(3)+' יח׳ של '+asset(s).n)}
+  log(k,trade.m,asset(s).n,n);snap();close();render()}});
+$('sheet').addEventListener('input',e=>{if(e.target.id=='amt'){trade.v=e.target.value.replace(',','.');const p=e.target.selectionStart;drawSheet();const a=$('amt');a.focus();try{a.setSelectionRange(p,p)}catch(x){}}});
+let tt;function toast(t){const el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2400)}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+function log(k,ty,t,a){k.txs.unshift({d:new Date().toLocaleDateString('he-IL',{day:'2-digit',month:'2-digit'}),t:(ty=='buy'?'קנייה: ':ty=='sell'?'מכירה: ':'')+t,a,ty})}
+KIDS.forEach(k=>k.txs=[{d:'01/'+String(new Date().getMonth()+1).padStart(2,'0'),t:'הוראת קבע חודשית',a:500,ty:'dep'}]);
+let rm=0;
+function mname(i){const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-i);return d.toLocaleDateString('he-IL',{month:'long',year:'numeric'})}
+function series(k){
+ const g=[.018,-.007,.024].map((x,i)=>x*(1+((k.name.charCodeAt(0)+i)%3)/4));
+ const dep=[k.txs.filter(x=>x.ty=='dep').reduce((s,x)=>s+x.a,0),k.monthly||500,k.monthly||500];
+ if(k.opened)return[{cl:total(k),op:0,dep:dep[0]}];
+ const cl=[total(k)];for(let i=0;i<3;i++)cl.push((cl[i]-dep[i])/(1+g[i]));
+ return[0,1,2].map(i=>({cl:cl[i],op:cl[i+1],dep:dep[i]}))}
+function report(k){
+ const S=series(k);if(rm>=S.length)rm=0;
+ const m=S[rm],gain=m.cl-m.op-m.dep,base=m.op+m.dep,r=base?gain/base*100:0,fee=m.cl*.0025/12,T=total(k);
+ const al=Object.entries(k.h).filter(([,x])=>x.q>1e-6).map(([s,x])=>[asset(s).n,x.q*px[s].p/T*100]);
+ if(k.cash>1)al.push(['מזומן',k.cash/T*100]);
+ const rows=rm==0?k.txs.slice(0,8):[{d:'01',t:'הוראת קבע חודשית',a:m.dep,ty:'dep'}];
+ return `<div class="mch">${S.map((_,i)=>`<button data-r="${i}" aria-pressed="${i==rm}">${mname(i)}</button>`).join('')}</div>
+ <div class="card" style="margin-top:0"><h2>דוח חודשי: ${k.name}</h2><p class="sub">${mname(rm)}${rm==0?' (עד היום)':''}</p>
+ <div class="kv"><span>שווי פתיחה</span><b>${f(m.op)}</b></div>
+ <div class="kv"><span>הפקדות</span><b>${f(m.dep)}</b></div>
+ <div class="kv"><span>רווח או הפסד</span><b class="${gain>=0?'up':'dn'}">${gain>=0?'+':'−'}${f(Math.abs(gain))} (${pct(r)})</b></div>
+ <div class="kv"><span>דמי ניהול (דמה, 0.25% בשנה)</span><b>${f(fee,2)}</b></div>
+ <div class="kv"><span>שווי סגירה</span><b>${f(m.cl)}</b></div>
+ <button class="btn o" data-mail="1" style="width:100%;margin-top:12px">שליחת הדוח למייל</button></div>
+ <div class="card"><h2>הרכב התיק</h2><p class="sub">חלוקה נוכחית של השווי</p>${al.map(([n,p])=>`<div class="kv" style="border:0;padding:0"><span>${n}</span><b>${p.toFixed(1)}%</b></div><div class="bar"><i style="width:${p}%"></i></div>`).join('')}</div>
+ <div class="card"><h2>תנועות בחשבון</h2><p class="sub">&nbsp;</p>${rows.map(x=>`<div class="kv"><span>${x.d} · ${x.t}</span><b class="${x.ty=='dep'?'up':''}">${x.ty=='dep'?'+':''}${f(x.a)}</b></div>`).join('')}</div>
+ <p class="note">הדוח לדוגמה בלבד ומבוסס על נתוני דמה. אינו מסמך בנקאי ואינו ייעוץ השקעות.</p>`}
+const PROF={low:{n:'שמרני',d:'רוב הכסף באג״ח, תנודתיות נמוכה. 70% אג״ח, 30% S&P 500.',al:{BOND:.7,SPX:.3}},mid:{n:'מאוזן',d:'שילוב של אג״ח ומניות. 30% אג״ח, 40% S&P 500, 30% ת״א 125.',al:{BOND:.3,SPX:.4,TA125:.3}},high:{n:'צמיחה',d:'דגש על מניות, תנודתיות גבוהה. 40% S&P 500, 40% נאסד״ק, 20% ת״א 125.',al:{SPX:.4,NDX:.4,TA125:.2}}};
+const GOALS=['לימודים','דירה','רכב','חיסכון כללי'];
+let acc=null;
+function openAcc(){acc={st:0,name:'',year:'',id:'',goal:'לימודים',init:1000,monthly:300,risk:'mid',ok:false,err:''};drawAcc();$('acc').classList.add('on');$('acc').scrollTop=0}
+function closeAcc(){acc=null;$('acc').classList.remove('on')}
+function readAcc(){const v=id=>$(id).value;if($('a-name')){acc.name=v('a-name').trim();acc.year=v('a-year').trim();acc.id=v('a-id').trim()}if($('a-init')){acc.init=+v('a-init')||0;acc.monthly=+v('a-mon')||0}if($('a-ok'))acc.ok=$('a-ok').checked}
+function chk(){const a=acc,Y=new Date().getFullYear();
+ if(a.st==0){if(a.name.length<2)return 'הזינו את שם הילד';if(!(+a.year>Y-18&&+a.year<=Y))return 'הזינו שנת לידה בין '+(Y-17)+' ל־'+Y;if(!/^\d{9}$/.test(a.id))return 'מספר זהות חייב לכלול 9 ספרות'}
+ if(a.st==1){if(a.init<100)return 'ההפקדה הראשונה חייבת להיות לפחות ₪100';if(a.monthly<0)return 'ההפקדה החודשית לא יכולה להיות שלילית'}
+ if(a.st==3&&!a.ok)return 'יש לאשר את ההצהרה כדי להמשיך';return ''}
+function drawAcc(){
+ const a=acc;let b='';
+ if(a.st==0)b=`<h2>פרטי הילד</h2><p class="sub">החשבון נרשם על שם הילד, ואתם מנהלים אותו כאפוטרופוסים עד גיל 18.</p><label class="fl">שם הילד<input id="a-name" value="${esc(a.name)}" autocomplete="off"></label><label class="fl">שנת לידה<input id="a-year" inputmode="numeric" maxlength="4" value="${esc(a.year)}"></label><label class="fl">מספר זהות של הילד<input id="a-id" inputmode="numeric" maxlength="9" value="${esc(a.id)}"></label>`;
+ if(a.st==1)b=`<h2>מטרה והפקדה</h2><p class="sub">למה אתם משקיעים עבור ${esc(a.name)}?</p><div class="gchips">${GOALS.map(g=>`<button data-g="${g}" aria-pressed="${a.goal==g}">${g}</button>`).join('')}</div><label class="fl">הפקדה ראשונה (₪)<input id="a-init" inputmode="numeric" value="${a.init}"></label><label class="fl">הפקדה חודשית (₪)<input id="a-mon" inputmode="numeric" value="${a.monthly}"></label>`;
+ if(a.st==2)b=`<h2>פרופיל סיכון</h2><p class="sub">קובע איך תושקע ההפקדה הראשונה. אפשר לשנות אחר כך.</p>${Object.entries(PROF).map(([k,p])=>`<button class="opt" data-rk="${k}" aria-pressed="${a.risk==k}"><b>${p.n}</b><span>${p.d}</span></button>`).join('')}`;
+ if(a.st==3)b=`<h2>סיכום ואישור</h2><div class="card" style="margin-top:10px"><div class="kv"><span>שם</span><b>${esc(a.name)}, גיל ${new Date().getFullYear()-a.year}</b></div><div class="kv"><span>מטרה</span><b>${a.goal}</b></div><div class="kv"><span>הפקדה ראשונה</span><b>${f(a.init)}</b></div><div class="kv"><span>הוראת קבע חודשית</span><b>${f(a.monthly)}</b></div><div class="kv"><span>פרופיל</span><b>${PROF[a.risk].n}</b></div></div><p class="note">90% מההפקדה הראשונה יושקעו אוטומטית לפי הפרופיל, והשאר יישאר כמזומן.</p><label class="ck"><input type="checkbox" id="a-ok" ${a.ok?'checked':''}><span>אני ההורה או האפוטרופוס של הילד, ומבין שהשקעה בשוק ההון כרוכה בסיכון להפסד.</span></label>`;
+ $('acc').innerHTML=`<div class="accin"><div class="top" style="padding-top:0"><div class="logo">fibi <i>gen</i></div><button data-x="1" aria-label="סגירה" style="border:0;background:none;font-size:22px">✕</button></div><div class="steps">${[0,1,2,3].map(i=>`<i class="${i<=a.st?'d':''}"></i>`).join('')}</div>${b}${a.err?`<div class="err" role="alert">${a.err}</div>`:''}<div class="nv">${a.st?'<button class="btn o" data-ab="1">חזרה</button>':''}<button class="btn" data-an="1">${a.st==3?'פתחו חשבון':'המשך'}</button></div>${CR}</div>`}
+$('acc').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;readAcc();
+ if(b.dataset.x)closeAcc();
+ else if(b.dataset.g){acc.goal=b.dataset.g;drawAcc()}
+ else if(b.dataset.rk){acc.risk=b.dataset.rk;drawAcc()}
+ else if(b.dataset.ab){acc.st--;acc.err='';drawAcc()}
+ else if(b.dataset.an){const er=chk();acc.err=er;if(er){drawAcc();return}if(acc.st==3)finish();else{acc.st++;drawAcc()}}});
+function finish(){
+ const a=acc,k={name:esc(a.name),age:new Date().getFullYear()-a.year,cash:a.init,h:{},hist:[],txs:[],opened:true,goal:a.goal,monthly:a.monthly,risk:a.risk};
+ log(k,'dep','הפקדה ראשונה',a.init);
+ Object.entries(PROF[a.risk].al).forEach(([s,w])=>{const n=a.init*.9*w;k.h[s]={q:n/px[s].p,c:n};k.cash-=n;log(k,'buy',asset(s).n,n)});
+ k.hist=Array(30).fill(a.init);KIDS.push(k);cur=KIDS.length-1;tab='home';rm=0;closeAcc();render();window.scrollTo(0,0);toast('החשבון של '+k.name+' נפתח')}
+let mode='parent',pinOpen=false,pinErr=false;
+function playAcc(k){return k.play||(k.play={name:'התיק המדומה',cash:10000,h:{},txs:[]})}
+function pTotal(p){return p.cash+Object.entries(p.h).reduce((t,[s,x])=>t+x.q*px[s].p,0)}
+function renderChild(){
+ const k=KIDS[cur],sc=window.scrollY,yrs=Math.max(0,18-k.age);
+ let b='';
+ if(tab=='cplay'){
+  const p=playAcc(k),pt=pTotal(p),pg=pt-10000,e=Object.entries(p.h).filter(([,x])=>x.q>1e-6);
+  b=`<div class="hero play"><small>משחק מסחר · כסף מדומה</small><div class="big">${f(pt)}</div><div class="chg ${pg>=0?'up':'dn'}">${pg>=0?'▲':'▼'} ${f(Math.abs(pg))} מאז תחילת המשחק</div><div class="cash"><span>מזומן מדומה לקנייה</span><b>${f(p.cash)}</b></div></div>
+  <div class="card"><h2>התיק המדומה שלך</h2><p class="sub">מתחילים עם ${f(10000)} מדומים. מותר לטעות כאן, זה תרגול.</p>`+
+  (e.length?e.map(([s,x])=>{const v=x.q*px[s].p,g=v-x.c;return `<button class="row" data-ps="${s}" data-pm="sell"><span class="n"><b>${asset(s).n}</b><span>${x.q.toFixed(3)} יח׳</span></span><span class="p">${f(v)}<span class="${g>=0?'up':'dn'}">${g>=0?'+':'−'}${f(Math.abs(g))}</span></span></button>`}).join(''):'<div class="empty">עוד לא קנית כלום. בחר נכס מהשוק למטה.</div>')+
+  `</div><div class="card"><h2>שוק</h2><p class="sub">לחצו על נכס כדי לקנות.</p>`+
+  ASSETS.map(a=>{const x=px[a.s],c=(x.p/x.o-1)*100;return `<button class="row" data-ps="${a.s}"><span class="n"><b>${a.n}</b><span>${a.t}</span></span><span class="p">${f(x.p,2)}<span class="${c>=0?'up':'dn'}">${pct(c)}</span></span></button>`}).join('')+
+  `</div><button class="btn o" data-preset="1" style="width:100%;margin-top:14px">התחלת המשחק מחדש</button><p class="note">זה משחק לתרגול. הכסף מדומה ואינו משפיע על החשבון האמיתי שלך.</p>`}
+ else{
+  const t=total(k),g=inv(k)-cost(k),e=Object.entries(k.h).filter(([,x])=>x.q>1e-6);
+  b=`<div class="hero kidh"><small>היי ${k.name}, זה הכסף ששומרים בשבילך</small><div class="big">${f(t)}</div><div class="chg ${g>=0?'up':'dn'}">${g>=0?'▲':'▼'} ${f(Math.abs(g))} ${g>=0?'רווח':'הפסד'} עד היום</div>${spark(k.hist)}<span class="lock">צפייה בלבד · רק ההורים קונים ומוכרים</span></div>
+  <div class="card"><h2>במה הכסף מושקע</h2><p class="sub">אפשר להסתכל ולשאול את ההורים כל שאלה.</p>`+
+  (e.length?e.map(([s,x])=>{const v=x.q*px[s].p,gg=v-x.c;return `<div class="row"><span class="n"><b>${asset(s).n}</b><span>${asset(s).t}</span></span><span class="p">${f(v)}<span class="${gg>=0?'up':'dn'}">${gg>=0?'+':'−'}${f(Math.abs(gg))}</span></span></div>`}).join(''):'<div class="empty">עוד לא הושקע כלום.</div>')+
+  `<div class="row"><span class="n"><b>מזומן</b></span><span class="p">${f(k.cash)}</span></div></div>
+  <div class="card"><h2>${yrs?'עוד '+yrs+' שנים עד גיל 18':'הגעת לגיל 18'}</h2><p class="sub">בגיל 18 הכסף עובר לשליטה שלך.</p><div class="line"><div class="fill" style="width:${k.age/18*100}%"></div><div class="dot" style="inset-inline-start:${k.age/18*100}%"></div></div><div class="ends"><span>גיל 0</span><span>היום: ${k.age}</span><span>גיל 18</span></div></div>
+  <p class="note">רוצים לנסות לסחור בעצמכם? עברו ללשונית משחק מסחר, שם הכסף מדומה.</p>`}
+ const pin=pinOpen?`<div class="card" style="margin-top:0;margin-bottom:12px"><h2>חזרה למצב הורה</h2><p class="sub">הזינו קוד הורה. בדמו הקוד הוא 1234.</p><input class="amt" id="pin" type="password" inputmode="numeric" maxlength="4" aria-label="קוד הורה" style="font-size:24px;letter-spacing:8px">${pinErr?'<div class="err" role="alert">הקוד שגוי. נסו שוב.</div>':''}<div class="nv"><button class="btn o" data-pincancel="1">ביטול</button><button class="btn" data-pinok="1">אישור</button></div></div>`:'';
+ $('app').innerHTML=`<div class="top"><div class="logo">fibi <i>gen</i></div><button class="btn o s" data-exit="1">מצב הורה</button></div>${pin}`+b+CR;
+ $('nav').innerHTML=[['cmy','הכסף שלי'],['cplay','משחק מסחר']].map(([id,l])=>`<button data-t="${id}" ${tab==id?'aria-current="true"':''}>${l}</button>`).join('');
+ if(pinOpen)setTimeout(()=>{const p=$('pin');p&&p.focus()},30);
+ else window.scrollTo(0,sc)}
+$('app').addEventListener('click',e=>{if(mode!='child')return;const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.exit){pinOpen=true;pinErr=false;render()}
+ else if(b.dataset.pincancel){pinOpen=false;render()}
+ else if(b.dataset.pinok){if($('pin').value=='1234'){mode='parent';tab='home';pinOpen=false;render();window.scrollTo(0,0);toast('חזרתם למצב הורה')}else{pinErr=true;render()}}
+ else if(b.dataset.ps)open(b.dataset.ps,b.dataset.pm||'buy',true);
+ else if(b.dataset.preset){KIDS[cur].play=null;render();toast('המשחק התחיל מחדש')}});
+const RP=[['n','מספר לקוחות שפתחו חשבון לילד',1000,100000,1000],['kid','הפקדה חודשית ממוצעת לחשבון הילד',100,2000,50],['sp','גידול בהשקעה העצמית של ההורה בחודש',0,1000,50],['fs','חלק מההפקדה שעבר מתוכניות חיסכון',0,100,5],['ramp','חודשי הצטרפות הדרגתית',1,12,1],['ret','תשואה שנתית ממוצעת',0,12,.5],['fee','דמי ניהול שנתיים',0,1,.05],['com','עמלה לפעולה',0,20,1],['set','עלות הקמה חד־פעמית',0,5000,100]];
+const SC={cons:{n:10000,kid:250,sp:50,fs:60,ramp:9,ret:4,fee:.2,com:3,set:1000},base:{n:20000,kid:400,sp:150,fs:40,ramp:6,ret:6,fee:.25,com:5,set:750},opt:{n:40000,kid:600,sp:250,fs:25,ramp:4,ret:7,fee:.3,com:7,set:600}};
+const SCN={cons:'שמרני',base:'בסיס',opt:'אופטימי'};
+let RV={...SC.base},RH=12,RS='base';
+const SAV_SPREAD=.012,TRADES=1.5,SERVE=15,FIX=300000;
+const fm=n=>(n<0?'−':'')+(Math.abs(n)>=1e6?'₪'+(Math.abs(n)/1e6).toFixed(2)+' מיל׳':f(Math.abs(n)));
+function rfmt(k,v){return k=='n'?v.toLocaleString('he-IL'):k=='ramp'?v+' חודשים':(k=='fs'||k=='ret'||k=='fee')?v+'%':k=='set'?f(v*1000):f(v)}
+function sim(){
+ const v=RV;let aum=0,mv=0,cost=v.set*1000,ben=0,rev=0,lost=0,pay=null,inflow=0,cum=-cost;const cs=[];
+ for(let m=1;m<=RH;m++){
+  const act=v.n*Math.min(1,m/v.ramp),inf=act*(v.kid+v.sp);inflow+=inf;
+  aum=aum*(1+v.ret/1200)+inf;mv+=act*v.kid*v.fs/100;
+  const r=aum*v.fee/1200+act*TRADES*v.com,l=mv*SAV_SPREAD/12,c=FIX/12+act*SERVE/12;
+  rev+=r;lost+=l;cost+=c;ben+=r-l;cum+=r-l-c;cs.push(cum);if(pay==null&&cum>=0)pay=m}
+ return{aum,rev,lost,cost,ben,cum,pay,cs,inflow,roi:cost?(ben-cost)/cost*100:0,per:v.kid+v.sp}}
+function rchart(a){
+ const mx=Math.max(0,...a),mn=Math.min(0,...a),r=(mx-mn)||1,y=x=>8+(mx-x)/r*84,y0=y(0),bw=300/a.length;
+ return `<svg viewBox="0 0 300 100" style="width:100%;height:110px" role="img" aria-label="רווח נטו מצטבר לפי חודש"><line x1="0" x2="300" y1="${y0}" y2="${y0}" stroke="var(--bd)"/>${a.map((x,i)=>`<rect x="${(i*bw+bw*.12).toFixed(1)}" width="${(bw*.76).toFixed(1)}" y="${Math.min(y0,y(x)).toFixed(1)}" height="${Math.max(1,Math.abs(y(x)-y0)).toFixed(1)}" rx="1.5" style="fill:${x>=0?'var(--up)':'var(--dn)'}"/>`).join('')}</svg>`}
+function renderRes(){
+ const s=sim(),yrs=RH/12;
+ $('roires').innerHTML=`<div class="cmp"><div class="m"><small>גידול חודשי בהשקעה לכל לקוח</small><b>${f(s.per)}</b><small>${f(s.per*12)} בשנה</small></div><div class="m"><small>ROI ל־${RH} חודשים</small><b class="${s.roi>=0?'up':'dn'}">${pct(s.roi)}</b><small>${s.pay?'החזר השקעה בחודש '+s.pay:'ללא החזר בתקופה'}</small></div><div><small>הון חדש שנכנס לשוק ההון</small><b>${fm(s.inflow)}</b></div><div><small>יתרת נכסים בסוף התקופה</small><b>${fm(s.aum)}</b></div></div>
+ <div class="card"><h2>רווח נטו מצטבר לפי חודש</h2><p class="sub">מתחיל בעלות ההקמה ועובר לרווח לאחר ההחזר</p>${rchart(s.cs)}
+ <div class="kv"><span>הכנסות מדמי ניהול ועמלות</span><b class="up">${fm(s.rev)}</b></div><div class="kv"><span>הכנסות שאבדו מתוכניות חיסכון</span><b class="dn">${fm(-s.lost)}</b></div><div class="kv"><span>עלויות הקמה ותפעול</span><b class="dn">${fm(-s.cost)}</b></div><div class="kv"><span>רווח נטו</span><b class="${s.cum>=0?'up':'dn'}">${fm(s.cum)}</b></div></div>`}
+function drawRoi(){
+ $('roi').innerHTML=`<div class="accin"><div class="top" style="padding-top:0"><div class="logo">fibi <i>gen</i></div><button data-x="1" aria-label="סגירה" style="border:0;background:none;font-size:22px">✕</button></div>
+ <h2>סימולציית ROI לבנק</h2><p class="sub">כמה ההורים יגדילו את ההשקעה החודשית שלהם בשוק ההון בגלל מסחר עבור הילדים, ומה זה שווה לבנק.</p>
+ <div class="mch">${Object.keys(SC).map(k=>`<button data-sc="${k}" aria-pressed="${RS==k}">תרחיש ${SCN[k]}</button>`).join('')}</div>
+ <div class="mch">${[12,24,36].map(h=>`<button data-h="${h}" aria-pressed="${RH==h}">${h/12==1?'שנה':h/12+' שנים'}</button>`).join('')}</div>
+ <div id="roires"></div>
+ <div class="card"><h2>הנחות לשינוי</h2>${RP.map(([k,l,mn,mx,st])=>`<label class="r" style="margin-top:12px"><span>${l}</span><b id="rl-${k}">${rfmt(k,RV[k])}</b></label><input type="range" data-rk="${k}" min="${mn}" max="${mx}" step="${st}" value="${RV[k]}" aria-label="${l}">`).join('')}
+ <p class="note">הנחות קבועות: ${TRADES} פעולות בחודש ללקוח, מרווח של 1.2% בשנה על תוכניות חיסכון, עלות שירות של ${f(SERVE)} ללקוח בשנה ועלות תפעול של ${f(FIX)} בשנה. המספרים להמחשה בלבד ואינם תחזית.</p></div>${CR}</div>`;renderRes()}
+function openRoi(){drawRoi();$('roi').classList.add('on');$('roi').scrollTop=0}
+$('roi').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.x)$('roi').classList.remove('on');
+ else if(b.dataset.sc){RS=b.dataset.sc;RV={...SC[RS]};drawRoi()}
+ else if(b.dataset.h){RH=+b.dataset.h;drawRoi()}});
+$('roi').addEventListener('input',e=>{const k=e.target.dataset.rk;if(!k)return;RV[k]=+e.target.value;$('rl-'+k).textContent=rfmt(k,RV[k]);renderRes()});
+let qrU='https://claude.ai/artifact/4qatyQgE2FyYWP4tHPBKNj';
+function qrSvg(t){try{const q=qrcode(0,'M');q.addData(t);q.make();const n=q.getModuleCount(),m=2;let p='';
+ for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(q.isDark(r,c))p+=`M${c+m} ${r+m}h1v1h-1z`;
+ return `<svg viewBox="0 0 ${n+2*m} ${n+2*m}" style="width:100%;display:block" shape-rendering="crispEdges" role="img" aria-label="קוד QR"><rect width="100%" height="100%" fill="#fff"/><path d="${p}" fill="#000"/></svg>`}catch(e){return '<div class="empty" style="color:#333">לא היה אפשר ליצור קוד QR. בדקו את הקישור.</div>'}}
+function openQr(){
+ $('qrov').innerHTML=`<div class="accin"><div class="top" style="padding-top:0"><div class="logo">fibi <i>gen</i></div><button data-x="1" aria-label="סגירה" style="border:0;background:none;font-size:22px">✕</button></div>
+ <h2>סרקו כדי לנסות את האפליקציה</h2><p class="sub">השירות הסריקה במצלמה של הטלפון והאפליקציה תפתח בדפדפן.</p>
+ <div id="qrbox" style="background:#fff;padding:14px;border-radius:18px;max-width:340px;margin:12px auto">${qrSvg(qrU)}</div>
+ <label class="fl">הקישור שבקוד<input id="qru" dir="ltr" value="${esc(qrU)}" autocomplete="off"></label>
+ <p class="note">הדביקו כאן את קישור השיתוף הסופי של האפליקציה אם הוא שונה, והקוד יתעדכן. בדקו שהאפליקציה נפתחת גם מטלפון שאינו מחובר לחשבון שלכם.</p>${CR}</div>`;
+ $('qrov').classList.add('on');$('qrov').scrollTop=0}
+$('qrov').addEventListener('click',e=>{if(e.target.closest('button'))$('qrov').classList.remove('on')});
+$('qrov').addEventListener('input',e=>{if(e.target.id=='qru'){qrU=e.target.value.trim();$('qrbox').innerHTML=qrSvg(qrU||' ')}});
+let gs=null,gv='form',gerr='',gn='',ge='',gk=false;
+try{gs=JSON.parse(localStorage.getItem('fg_nda')||'null')}catch(e){}
+function drawGate(){
+ let b;
+ if(gv=='receipt'&&gs)b=`<h2>האישור נרשם</h2><div class="card" style="margin-top:10px"><div class="kv"><span>שם</span><b>${esc(gs.n)}</b></div><div class="kv"><span>אימייל</span><b dir="ltr">${esc(gs.e)}</b></div><div class="kv"><span>תאריך ושעה</span><b>${new Date(gs.t).toLocaleString('he-IL')}</b></div></div><p class="note">צילום מסך של המסך הזה משמש אסמכתא לאישור. הפרטים שמורים בדפדפן שלכם בלבד.</p><div class="nv"><button class="btn" data-ggo="1">המשיכו לאפליקציה</button></div>`;
+ else b=`<h2>אישור סודיות ושימוש</h2><p class="sub">האפליקציה fibi gen, העיצוב, הטקסטים, מודל ה־ ROI והרעיון העסקי שמוצגים בה הם יצירתה של Avishag Mevorach © 2026, ומוצגים לצורך הערכה בלבד.</p>
+ <label class="fl">שם מלא<input id="g-n" autocomplete="name" value="${esc(gn)}"></label>
+ <label class="fl">אימייל<input id="g-e" type="email" dir="ltr" autocomplete="email" inputmode="email" value="${esc(ge)}"></label>
+ <label class="ck"><input type="checkbox" id="g-ok" ${gk?'checked':''}><span>אני מתחייב/ת: (1) לא להעתיק, לשכפל או לפתח מוצר או שירות על בסיס החומר; (2) לא להעביר אותו לאחרים ללא אישור בכתב; (3) לא להשתמש בו למטרה מסחרית. אני מבין/ה שהאישור אינו מעניק לי רישיון.</span></label>
+ <p class="note">השם והאימייל נשמרים בדפדפן שלך בלבד ולא נשלחים לאף אחד.</p>${gerr?`<div class="err" role="alert">${gerr}</div>`:''}
+ <div class="nv"><button class="btn" data-gok="1">אישור והמשך</button></div>`;
+ $('gate').innerHTML=`<div class="accin"><div class="top" style="padding-top:0"><div class="logo">fibi <i>gen</i></div></div>${b}${CR}</div>`;
+ $('gate').classList.add('on')}
+$('gate').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.ggo)$('gate').classList.remove('on');
+ else if(b.dataset.gok){
+  const n=$('g-n').value.trim(),m=$('g-e').value.trim(),ok=$('g-ok').checked;gn=n;ge=m;gk=ok;
+  if(n.length<2)gerr='הזינו שם מלא';
+  else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m))gerr='הזינו כתובת אימייל תקינה';
+  else if(!ok)gerr='יש לסמן את ההתחייבות כדי להמשיך';
+  else{gerr='';gs={n,e:m,t:new Date().toISOString()};try{localStorage.setItem('fg_nda',JSON.stringify(gs))}catch(x){}gv='receipt'}
+  drawGate()}});
+if(gs)$('gate').classList.remove('on');else drawGate();
+render();
+</script>
+</body>
+</html>
